@@ -6,7 +6,7 @@
 # Firebase credentials
 firebase-config.js
 
-#Gemini Key
+# API Keys and sensitive config
 config.js
 
 # Dependencies

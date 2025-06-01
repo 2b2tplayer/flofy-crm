@@ -6,6 +6,9 @@
 # Firebase credentials
 firebase-config.js
 
+#Gemini Key
+config.js
+
 # Dependencies
 node_modules/
 

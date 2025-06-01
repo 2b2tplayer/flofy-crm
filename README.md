@@ -1,122 +1,119 @@
-# Flofy Chat + CRM System
+# Flofy Chat - Sistema CRM Inteligente
 
-Un sistema completo de chatbot con integración de Gemini AI y CRM para gestión de conversaciones.
+Sistema de chat integrado con CRM que permite alternancia entre respuestas automatizadas (IA) y asesores humanos, con persistencia Firebase.
 
-## Componentes del Sistema
+## 🚀 Características Principales
 
-### 1. Chatbot Widget (`index.html`)
+- **Chat inteligente** con IA (Gemini)
+- **CRM integrado** para gestión de conversaciones
+- **Alternancia IA/Humano** sin interrupciones
+- **Sincronización en tiempo real** entre interfaces
+- **Persistencia Firebase** con fallback offline
+- **Interfaz moderna** y responsive
 
-- Widget de chat flotante
-- Integración con Gemini AI
-- Respuestas limitadas a 200 caracteres
-- Sistema de resumen de conversación
-- Sincronización automática con CRM
+## ⚙️ Configuración Rápida
 
-### 2. CRM Dashboard (`crm.html`)
+### 1. Clonar el repositorio
 
-- Panel de administración de conversaciones
-- Lista de todas las conversaciones del chatbot
-- Control manual/automático (IA vs Asesor)
-- Interfaz para responder como asesor
-- Monitoreo en tiempo real
+```bash
+git clone https://github.com/2b2tplayer/flofy-crm.git
+cd flofy-crm
+```
 
-## Funcionalidades Principales
+### 2. Configurar Firebase
 
-### Chatbot
+```bash
+# Copiar plantilla de Firebase
+cp firebase-config.example.js firebase-config.js
 
-- **Respuestas automáticas**: Gemini AI responde automáticamente
-- **Límite de caracteres**: Respuestas máximo 200 caracteres
-- **Contexto**: Mantiene historial y resumen de conversación
-- **Persistencia**: Guarda conversaciones en localStorage
+# Editar firebase-config.js con tus credenciales de Firebase
+```
 
-### CRM
+### 3. Configurar Gemini API
 
-- **Tomar Control**: Asesor puede tomar control de conversación
-- **Modo Asesor**: Cuando está activo, aparece "asesor" en lugar de "flofy"
-- **Modo IA**: Cuando está activo, aparece "flofy" y responde automáticamente
-- **Contexto Compartido**: Las respuestas del asesor se incluyen en el contexto de la IA
-- **Sincronización**: Conversaciones se sincronizan en tiempo real
+```bash
+# Copiar plantilla de configuración
+cp config.example.js config.js
 
-## Configuración
+# Editar config.js y agregar tu API key de Gemini:
+# GEMINI_API_KEY: "tu_api_key_aqui"
+```
 
-### Gemini API
+### 4. Configurar variables de entorno (opcional)
 
-1. Obtener API key de Google Gemini
-2. Actualizar `CONFIG.GEMINI_API_KEY` en `config.js`
+```bash
+# Copiar plantilla
+cp env.example .env
 
-### Archivos Principales
+# Editar .env con tus credenciales
+```
 
-- `index.html` - Widget del chatbot
-- `crm.html` - Dashboard del CRM
-- `script.js` - Lógica del chatbot
-- `crm.js` - Lógica del CRM
-- `config.js` - Configuración compartida
+## 🔧 Uso
 
-## Uso
+1. Abre `index.html` para el **chatbot**
+2. Abre `crm.html` para el **panel CRM**
+3. Las conversaciones se sincronizan automáticamente
 
-### Para usar el Chatbot:
+## 🔒 Archivos de Configuración
 
-1. Abrir `index.html` en el navegador
-2. Hacer clic en el botón flotante para abrir el chat
-3. Escribir mensajes y recibir respuestas automáticas
+### Archivos que DEBES configurar:
 
-### Para usar el CRM:
+- `firebase-config.js` - Credenciales Firebase
+- `config.js` - API key de Gemini
+- `.env` - Variables de entorno (opcional)
 
-1. Abrir `crm.html` en el navegador
-2. Ver lista de conversaciones activas
-3. Seleccionar una conversación
-4. Usar "Tomar Control" para responder manualmente
-5. Usar "Entregar a IA" para volver al modo automático
+### Archivos de plantilla (NO editar):
 
-## Flujo de Control
+- `firebase-config.example.js`
+- `config.example.js`
+- `env.example`
 
-### Modo IA (por defecto)
+## 📁 Estructura del Proyecto
 
-- La IA (Gemini) responde automáticamente
-- Aparece "flofy" como nombre del bot
-- Respuestas limitadas a 200 caracteres
+```
+flofy-crm/
+├── index.html              # Interfaz chatbot
+├── crm.html               # Panel CRM
+├── script.js              # Lógica chatbot
+├── crm.js                 # Lógica CRM
+├── config.js              # ⚠️ Configuración API (local)
+├── config.example.js      # Plantilla configuración
+├── firebase-config.js     # ⚠️ Firebase config (local)
+├── firebase-config.example.js # Plantilla Firebase
+├── storage-adapter.js     # Abstracción almacenamiento
+├── migration-helper.js    # Migración automática
+└── setup-instructions.md  # Guía detallada
+```
 
-### Modo Asesor
+## 🛡️ Seguridad
 
-- El asesor toma control manual
-- Aparece "asesor" como nombre
-- La IA deja de responder automáticamente
-- Conversaciones del asesor se incluyen en contexto
+- Las credenciales **NO** se suben a GitHub
+- Archivos sensibles están en `.gitignore`
+- Plantillas disponibles para fácil configuración
+- Fallback a localStorage si Firebase falla
 
-### Cambio de Modo
+## 🔄 Sincronización
 
-- Botón "Tomar Control" → Activa modo asesor
-- Botón "Entregar a IA" → Reactiva modo IA
-- Mensaje del sistema notifica el cambio
+- **CRM ↔ Chatbot**: Sincronización bidireccional automática
+- **Control IA/Humano**: Cambio instantáneo entre modos
+- **Persistencia**: Firebase + localStorage como respaldo
+- **Offline**: Funciona sin conexión a internet
 
-## Almacenamiento
+## 📖 Documentación Adicional
 
-### localStorage Keys
+- `setup-instructions.md` - Configuración detallada Firebase
+- `setup-github.md` - Guía para colaboradores
+- Comentarios en código para funciones específicas
 
-- `flofy_conversations` - Conversaciones sincronizadas con CRM
-- `chatHistory_${userId}` - Historial individual por usuario
-- `chatSummary_${userId}` - Resumen de conversación por usuario
-- `crm_conversations` - Conversaciones del CRM
+## 🤝 Colaboración
 
-## Personalización
+Para contribuir:
 
-### Límites de Respuesta
+1. Fork el repositorio
+2. Crea tus archivos de configuración locales
+3. Desarrolla tu feature
+4. Pull request (sin incluir archivos de configuración)
 
-- Modificar `MAX_RESPONSE_LENGTH` en `config.js`
-- Modificar `MAX_SUMMARY_LENGTH` en `config.js`
+---
 
-### Estilos
-
-- Basado en Tailwind CSS
-- Colores y gradientes personalizables
-- Diseño responsive
-
-## Integración Futura
-
-El sistema está preparado para:
-
-- Integración con WhatsApp Business API
-- Conexión con bases de datos externas
-- Webhooks para notificaciones
-- Analytics y reportes
-- Múltiples canales de comunicación
+⚠️ **Importante**: Nunca commits archivos `config.js`, `firebase-config.js` o `.env` al repositorio.
